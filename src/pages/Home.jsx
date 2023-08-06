@@ -6,10 +6,9 @@ import { serverTimestamp } from "firebase/firestore";
 import { useDataContext } from "../context/dataContext";
 import { useAuthContext } from "../context/authContext";
 import ItemsList from "../components/ItemsList";
-import Loading from "../components/Loading";
 
 const Home = () => {
-  const { addData, loading, allUsersTextData } = useDataContext();
+  const { addData, allUsersTextData } = useDataContext();
   const { authUser } = useAuthContext();
   const [open, setOpen] = useState(false);
   const [data, setData] = useState("");
@@ -38,11 +37,8 @@ const Home = () => {
       <h1 className="flex justify-center items-center mt-4 text-2xl transition-all hover:text-sky-500 drop-shadow-xl">
         <FilterDramaIcon /> Thoughts field
       </h1>
-      {loading ? (
-        <Loading size={5} />
-      ) : (
-        <ItemsList textData={allUsersTextData} />
-      )}
+      <ItemsList textData={allUsersTextData} />
+
       <button
         onClick={handleClickOpen}
         title="create new thoughts"

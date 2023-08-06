@@ -17,7 +17,6 @@ const DataContext = createContext();
 export const DataContextProvider = ({ children }) => {
   const [authUserTextData, setAuthUserTextData] = useState([]);
   const [allUsersTextData, setAllUsersTextData] = useState([]);
-  const [loading, setLoading] = useState(true);
   const { authUser } = useAuthContext();
 
   const addData = async (data) => {
@@ -71,7 +70,6 @@ export const DataContextProvider = ({ children }) => {
               ...doc.data(),
             };
           });
-          setLoading(false);
           setAuthUserTextData(newData);
         }
       });
@@ -81,7 +79,6 @@ export const DataContextProvider = ({ children }) => {
     };
 
     if (authUser) {
-      setLoading(true);
       dataQueryForAuthUser();
     }
   }, [authUser]);
@@ -120,7 +117,6 @@ export const DataContextProvider = ({ children }) => {
         addData,
         editData,
         deleteData,
-        loading,
         authUserTextData,
         allUsersTextData,
       }}
